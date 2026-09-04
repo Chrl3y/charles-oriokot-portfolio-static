@@ -1,0 +1,197 @@
+:root { --portfolio-gold:#ffbd39; --portfolio-ink:#050505; --portfolio-panel:#111; --portfolio-line:rgba(255,255,255,.11); --portfolio-copy:rgba(255,255,255,.76); }
+html { scroll-behavior:auto; }
+body { background:var(--portfolio-ink); font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--portfolio-copy); }
+.hero,.home-slider-static { overflow:hidden; }
+.ftco-animate { opacity:1!important; visibility:visible!important; }
+.skip-link { position:fixed; left:1rem; top:-5rem; z-index:99999; padding:.75rem 1rem; border-radius:.35rem; background:#fff; color:#111; }
+.skip-link:focus { top:1rem; }
+.navbar-brand span,.eyebrow,.text-link { color:var(--portfolio-gold); }
+.ftco-navbar-light .navbar-brand { letter-spacing:-.05em; }
+.hero .slider-item,.hero .slider-item .slider-text { min-height:780px; }
+.hero-copy { z-index:2; padding-top:5rem; }
+.hero-copy h1 { max-width:12ch; font-size:clamp(3rem,6vw,5.25rem); line-height:.98; letter-spacing:-.055em; }
+.hero-lead { max-width:38rem; font-size:1.15rem; line-height:1.75; color:rgba(255,255,255,.76)!important; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+.hero-visual { align-self:end; display:flex; justify-content:center; min-height:720px; overflow:hidden; }
+.hero-visual::after { content:""; position:absolute; inset:15% 5% 3%; border-radius:50%; background:radial-gradient(circle,rgba(255,189,57,.15),transparent 66%); filter:blur(20px); z-index:-1; }
+.hero-visual img { width:100%; height:720px; object-fit:contain; object-position:center bottom; }
+.hero-proof { display:flex; flex-wrap:wrap; gap:1.75rem; margin:2.5rem 0 0; padding:1.5rem 0 0; list-style:none; border-top:1px solid var(--portfolio-line); }
+.hero-proof li { display:grid; gap:.15rem; }
+.hero-proof strong { color:#fff; font-size:1.35rem; line-height:1; }
+.hero-proof span { max-width:9rem; font-size:.72rem; line-height:1.4; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.58); }
+.heading-section .big { opacity:.05; }
+.heading-section h2 { letter-spacing:-.035em; }
+.heading-section>p { max-width:48rem; margin-left:auto; margin-right:auto; }
+.eyebrow { display:inline-block; margin-bottom:.7rem; font-size:.76rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+.portrait-panel { position:relative; width:100%; min-height:670px; overflow:hidden; border-radius:.3rem; background:#151515; }
+.portrait-panel::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.3)); pointer-events:none; }
+.portrait-panel img { width:100%; height:100%; object-fit:cover; object-position:center 28%; }
+.about-lead { color:#fff; font-size:1.14rem; line-height:1.75; }
+.about-info li span:first-child { width:145px; }
+.about-info li span:last-child { width:calc(100% - 145px); }
+.about-actions { display:flex; align-items:center; flex-wrap:wrap; gap:1.5rem; }
+.text-link { font-weight:700; }
+.section-muted { background:#0b0b0b; }
+.portfolio-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
+.work-card { position:relative; min-height:340px; padding:1.2rem; overflow:hidden; border:1px solid var(--portfolio-line); border-radius:.45rem; background:linear-gradient(145deg,rgba(var(--card-rgb),.17),rgba(17,17,17,.96) 38%); transition:transform .25s ease,border-color .25s ease; }
+.work-card:hover { transform:translateY(-5px); border-color:rgba(var(--card-rgb),.65); }
+.work-card--gold { --card-rgb:255,189,57; } .work-card--blue { --card-rgb:56,139,253; } .work-card--violet { --card-rgb:164,113,255; }
+.work-card--green { --card-rgb:47,194,122; } .work-card--orange { --card-rgb:255,126,77; } .work-card--cyan { --card-rgb:47,192,210; }
+.work-card__index { position:absolute; right:1rem; top:.5rem; color:rgba(var(--card-rgb),.18); font-size:3.5rem; font-weight:800; letter-spacing:-.08em; }
+.work-card__discipline { position:relative; display:block; margin-bottom:0.8rem; color:rgb(var(--card-rgb)); font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.work-card h3 { position:relative; max-width:15ch; color:#fff; font-size:1.5rem; line-height:1.1; }
+.work-card p { position:relative; min-height:80px; color:rgba(255,255,255,.68); }
+.metric-list { display:grid; gap:.45rem; margin:1rem 0; padding:1rem 0; list-style:none; border-top:1px solid var(--portfolio-line); border-bottom:1px solid var(--portfolio-line); }
+.metric-list li { display:flex; align-items:baseline; gap:.5rem; color:rgba(255,255,255,.72); font-size:.9rem; }
+.metric-list strong { color:#fff; font-size:1.05rem; }
+.tag-row { display:flex; flex-wrap:wrap; gap:.5rem; }
+.tag-row span { padding:.38rem .68rem; border:1px solid rgba(var(--card-rgb),.3); border-radius:999px; background:rgba(var(--card-rgb),.08); color:rgba(255,255,255,.8); font-size:.73rem; }
+.resume-wrap { height:auto; min-height:260px; padding:1.5rem; border:1px solid var(--portfolio-line); background:var(--portfolio-panel); }
+.resume-wrap h3 { color:#fff; font-size:1.5rem; }
+.resume-wrap .date { font-size:1rem; font-weight:700; color:var(--portfolio-gold); }
+.capability-grid { row-gap:1.8rem; }
+.capability-card { width:100%; min-height:260px; margin-bottom:0; padding:1.5rem; border:1px solid var(--portfolio-line); background:var(--portfolio-panel); text-align:left; }
+.capability-card::after { left:2rem; right:auto; width:44px; }
+.capability-card .icon { display:block; margin-bottom:1rem; font-size:2rem; color:var(--portfolio-gold); }
+.capability-card h3 { margin-bottom:0.6rem!important; color:#fff; font-size:1.1rem; text-align:left; }
+.capability-card p { margin:0; color:rgba(255,255,255,.62); text-transform:none; font-size:.9rem; line-height:1.5; }
+.toolkit-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.toolkit-group { padding:2rem; border:1px solid var(--portfolio-line); border-radius:.35rem; background:var(--portfolio-panel); }
+.toolkit-group h3 { margin-bottom:1.3rem; color:#fff; font-size:1.25rem; }
+.skill-chips { display:flex; flex-wrap:wrap; gap:.6rem; }
+.skill-chips span { padding:.6rem .85rem; border-radius:.25rem; background:rgba(255,189,57,.09); color:rgba(255,255,255,.78); font-size:.83rem; }
+.recognition-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.recognition-card { position:relative; min-height:400px; margin:0; overflow:hidden; border-radius:.35rem; background:#111; }
+.recognition-card--large { grid-row:span 2; min-height:816px; }
+.recognition-card--wide { min-height:400px; }
+.recognition-card img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+.recognition-card--large img { object-position:center 23%; }
+.recognition-card:hover img { transform:scale(1.025); }
+.recognition-card figcaption { position:absolute; inset:auto 0 0; display:grid; gap:.2rem; padding:4rem 1.5rem 1.4rem; background:linear-gradient(transparent,rgba(0,0,0,.9)); }
+.recognition-card figcaption strong { color:#fff; }
+.recognition-card figcaption span { color:rgba(255,255,255,.65); font-size:.82rem; }
+.ftco-hireme { background:radial-gradient(circle at 50% 20%,rgba(255,189,57,.22),transparent 40%),#0d0d0d; }
+.ftco-hireme h2 { color:#fff; }
+.contact-card { width:100%; border:1px solid var(--portfolio-line); border-radius:.35rem; background:var(--portfolio-panel); color:inherit; transition:border-color .2s ease,transform .2s ease; }
+/* Services hover: ensure all text is readable on gold background */
+.services-1:hover {
+  background: var(--portfolio-gold);
+}
+.services-1:hover .icon i {
+  color: #000;
+}
+.services-1:hover h3 {
+  color: #000;
+}
+.services-1:hover .desc h3:after {
+  background: #000;
+}
+.services-1:hover p {
+  color: #000;
+}
+
+/* Services hover fix complete */
+.contact-card p { overflow-wrap:anywhere; }
+.contact-card .icon { background:rgba(255,189,57,.12)!important; color:var(--portfolio-gold)!important; }
+.footer-links { display:grid; gap:.65rem; }
+.footer-links a { color:rgba(255,255,255,.66); }
+a:focus-visible,button:focus-visible { outline:3px solid #fff; outline-offset:4px; }
+@media (max-width:991.98px) { .hero .slider-item,.hero .slider-item .slider-text { min-height:auto; } .hero-copy { order:1; padding:9rem 1rem 1rem; } .hero-visual { order:2; min-height:590px; } .hero-visual img { height:590px; } .portfolio-grid { grid-template-columns:1fr; } .work-card p { min-height:auto; } .portrait-panel { min-height:580px; margin-bottom:2.5rem; } }
+@media (max-width:767.98px) { .hero-copy h1 { font-size:3.35rem; } .hero-lead { font-size:1rem; } .hero-proof { gap:1rem; } .hero-proof li { width:calc(50% - .5rem); } .hero-visual { min-height:490px; } .hero-visual img { height:490px; } .portfolio-grid,.toolkit-grid,.recognition-grid { grid-template-columns:1fr; } .work-card { min-height:auto; padding:1.6rem; } .recognition-card,.recognition-card--large,.recognition-card--wide { grid-row:auto; min-height:520px; } .portrait-panel { min-height:520px; } .about-info li { align-items:flex-start; } .about-info li span:first-child { width:120px; } .about-info li span:last-child { width:calc(100% - 120px); } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+
+/* Counter suffix ------------------------------------------------------------
+   animateNumber rewrites the <strong>'s text content on scroll, so a "+" has to
+   live in its own element to survive the animation. style.css sets
+   .ftco-counter strong.number to display:block, which would drop the suffix
+   onto its own line, so both are pulled back inline; the label span after them
+   is already display:block and still breaks correctly. */
+.ftco-counter .text strong.number { display: inline; }
+.counter-plus { font-weight: 700; color: var(--portfolio-gold, #ffbd39); }
+/* style.css sets `.ftco-counter .text span { display:block }` (specificity 0,2,1),
+   so the suffix needs an equally specific selector or the "+" wraps onto its own line. */
+.ftco-counter .text .counter-plus { display: inline; font-size: 30px; }
+.ftco-about .counter-wrap .text p .counter-plus { font-weight: 600; font-size: inherit; }
+
+/* Contact form note — sits on the .bg-light panel, so it needs a dark muted tone. */
+.contact-form .form-note { color: rgba(0,0,0,.55); font-size: .82rem; }
+
+/* Article pages -------------------------------------------------------------
+   The template ships no styling for long-form prose beyond paragraphs, so the
+   lede, code blocks and ordered lists used by the writing pages are set here. */
+.lead-para { color: #fff; font-size: 1.14rem; line-height: 1.75; }
+.ftco-section article h2 { color: #fff; letter-spacing: -.02em; }
+.ftco-section article ol,
+.ftco-section article ul { margin: 0 0 1.5rem; padding-left: 1.25rem; color: rgba(255,255,255,.72); }
+.ftco-section article li { margin-bottom: .5rem; }
+.ftco-section article code { padding: .15rem .35rem; border-radius: .2rem; background: rgba(255,189,57,.12); color: var(--portfolio-gold, #ffbd39); font-size: .9em; }
+.ftco-section article pre { margin: 0 0 1.5rem; padding: 1.25rem; overflow-x: auto; border: 1px solid var(--portfolio-line, rgba(255,255,255,.12)); border-radius: .35rem; background: rgba(0,0,0,.35); }
+.ftco-section article pre code { padding: 0; background: none; color: rgba(255,255,255,.82); line-height: 1.6; }
+.sidebar .block-21 .heading a[aria-current="page"] { color: var(--portfolio-gold, #ffbd39); }
+
+/* Loader click-trap fix -----------------------------------------------------
+   style.css fades #ftco-loader to opacity:0 but its `visibility 0s linear .2s`
+   transition can leave it `visible` — invisible yet still hit-testable. Because
+   it is position:fixed, 100%x100%, z-index:1000, it then swallows every click
+   on the page, which is why links (blog cards especially) appeared dead. */
+#ftco-loader:not(.show) { pointer-events: none; }
+
+/* Counter band --------------------------------------------------------------
+   #section-counter carries the `img` class but style.css gives it no padding or
+   overlay of its own, so the photo needs both: a dark wash for contrast, and
+   bottom room for #cta-section's `.margin-top:-70px` to cut into without
+   clipping the cards. */
+#section-counter { position: relative; background-size: cover; background-position: center 20%; }
+#section-counter > .overlay { position: absolute; top:0; right:0; bottom:0; left:0; background: rgba(5,5,5,.86); }
+#section-counter > .container { position: relative; z-index: 1; padding-top: 5em; padding-bottom: 7em; }
+
+/* Credentials ---------------------------------------------------------------
+   Reuses .toolkit-grid / .toolkit-group, which the toolkit block left behind
+   when the Skills bars were restored. */
+.cert-group--wide { grid-column: 1 / -1; }
+.cert-list { margin: 0; padding: 0; list-style: none; display: grid; gap: .55rem; }
+.cert-list--two { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.25rem; }
+.cert-list a { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding: .6rem .85rem; border: 1px solid var(--portfolio-line, rgba(255,255,255,.12));
+  border-radius: .3rem; background: rgba(255,255,255,.02);
+  color: rgba(255,255,255,.82); font-size: .9rem; line-height: 1.35;
+  transition: border-color .2s ease, background .2s ease, color .2s ease; }
+.cert-list a:hover, .cert-list a:focus { border-color: rgba(255,189,57,.55);
+  background: rgba(255,189,57,.07); color: #fff; text-decoration: none; }
+.cert-list a span { flex: none; color: var(--portfolio-gold, #ffbd39); font-size: .72rem;
+  letter-spacing: .08em; text-transform: uppercase; }
+.cert-count { margin-left: .5rem; color: rgba(255,255,255,.45); font-size: .8rem;
+  font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+.cert-note { margin: 1rem 0 0; color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.55; }
+@media (max-width: 767.98px) { .cert-list--two { grid-template-columns: 1fr; } }
+
+/* Product cards -------------------------------------------------------------
+   These reuse .services-1 for the hover/icon treatment, but style.css sets
+   `.services-1 .desc h3` to 13px uppercase with a centred rule at bottom:-15px
+   — which, without the template's `mb-5`, lands on top of the paragraph.
+   Higher specificity than `.services-1 .desc h3` (0,2,1) is required. */
+.capability-card.services-1 .desc h3 { margin-bottom: 1.5rem; font-size: 1.05rem;
+  font-weight: 600; letter-spacing: .005em; text-transform: none; }
+.capability-card.services-1 .desc h3:after { left: 0; right: auto; margin: 0;
+  width: 44px; bottom: -.75rem; }
+.capability-card.services-1 .icon { margin-bottom: 1.25rem; }
+.capability-card.services-1 .icon i { font-size: 2.4rem; }
+
+/* CTA band ------------------------------------------------------------------
+   `.ftco-hireme { background: ... }` above is a SHORTHAND, so it resets the
+   background-size/repeat that style.css's `.img` rule sets — which made the
+   inline photo on #cta-section tile instead of cover. Restore those, and lay a
+   scrim over the photo so the headline keeps its contrast. */
+.ftco-hireme.img { background-size: cover; background-repeat: no-repeat; background-position: center 25%; }
+#cta-section { position: relative; }
+#cta-section::before { content: ""; position: absolute; top:0; right:0; bottom:0; left:0;
+  background: radial-gradient(ellipse at 50% 45%, rgba(5,5,5,.72), rgba(5,5,5,.93) 70%); }
+#cta-section > .container { position: relative; z-index: 1; }
+
+/* Article hero scrim --------------------------------------------------------
+   style.css ships `.hero-wrap .overlay { opacity: 0 }`, so the headline sits on
+   the raw photograph. Bottom-weighted gradient: the top of the image stays
+   readable, the title area gets the contrast it needs. */
+.hero-wrap .overlay { opacity: 1;
+  background: linear-gradient(180deg, rgba(5,5,5,.45) 0%, rgba(5,5,5,.30) 35%, rgba(5,5,5,.90) 100%); }
+.hero-wrap .bread { text-shadow: 0 2px 24px rgba(0,0,0,.55); }

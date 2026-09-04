@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Invert the Junction | Charles Oriokot</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="How to move a knowledge base without touching a single one of the 294 references pointing at it — and the three silent failure modes that come with directory junctions.">
+    <meta name="author" content="Oriokot Charles Ediu">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#050505">
+
+    <link rel="icon" href="images/charles-portrait.jpg" type="image/jpeg">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar" aria-label="Primary navigation">
+      <div class="container">
+        <a class="navbar-brand" href="index.html" aria-label="Charles Oriokot, home">Charles<span>.</span></a>
+        <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav nav ml-auto">
+            <li class="nav-item"><a href="index.html#home-section" class="nav-link"><span>Home</span></a></li>
+            <li class="nav-item"><a href="index.html#about-section" class="nav-link"><span>About</span></a></li>
+            <li class="nav-item"><a href="index.html#portfolio-section" class="nav-link"><span>Portfolio</span></a></li>
+            <li class="nav-item"><a href="index.html#resume-section" class="nav-link"><span>Experience</span></a></li>
+            <li class="nav-item"><a href="index.html#services-section" class="nav-link"><span>Capabilities</span></a></li>
+            <li class="nav-item"><a href="index.html#products-section" class="nav-link"><span>Products</span></a></li>
+            <li class="nav-item"><a href="index.html#skills-section" class="nav-link"><span>Skills</span></a></li>
+            <li class="nav-item"><a href="index.html#blog-section" class="nav-link"><span>Writing</span></a></li>
+            <li class="nav-item"><a href="index.html#contact-section" class="nav-link"><span>Contact</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main id="main-content">
+	  <section class="hero-wrap js-fullheight" style="background-image: url('images/image_2.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+          <div class="col-md-12 ftco-animate pb-5 mb-3 text-center">
+            <h1 class="mb-3 bread">Invert the Junction</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="index.html#blog-section">Writing <i class="ion-ios-arrow-forward"></i></a></span> <span>August 4, 2026</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <article>
+            <p class="lead-para">When you migrate a body of files that other things point at, the expensive part is never the files. It is the references. Move the files and leave a link behind at the old address, and the migration costs nothing.</p>
+
+            <h2 class="mb-3 mt-5">The situation</h2>
+            <p>A workspace had accumulated a real knowledge base without anyone designing one: three dozen architecture dossiers, a 190&nbsp;KB incident log, a 219&nbsp;KB log of database quirks, six hundred report files. It lived inside a code repository, and the code repository had been opened as an Obsidian vault &mdash; all 399,000 files and 9.8&nbsp;GB of it, <code>node_modules</code> included. Search was useless. The graph was a hairball.</p>
+            <p>The fix was obvious: give the knowledge its own vault. The obstacle was less obvious. Roughly 294 references across 73 files pointed at those paths &mdash; instruction files that AI agents read, scripts that resolve paths at runtime, editor workspace configs, and years of reports citing each other.</p>
+            <p>Three of those files were named in a policy that said <em>every session must append here before it ends</em>. Break the paths and you don't get an error. You get agents writing to a location nobody reads.</p>
+
+            <h2 class="mb-3 mt-5">The move most people make</h2>
+            <p>Move the files, then grep for the old path and fix every hit. It works. It also means auditing 73 files to decide which references are load-bearing and which are historical prose that should keep saying what it said.</p>
+
+            <h2 class="mb-3 mt-5">The move that costs nothing</h2>
+            <p>Move the bytes to the new home. Then create a directory junction at the <strong>old</strong> path pointing at the new one.</p>
+            <pre><code>&lt;repo&gt;\docs\project-knowledge  -&gt;  &lt;vault&gt;\Knowledge
+&lt;repo&gt;\memory                  -&gt;  &lt;vault&gt;\Memory
+&lt;repo&gt;\reports                 -&gt;  &lt;vault&gt;\Reports</code></pre>
+            <p>Every one of the 294 references still resolves, because a junction is transparent to anything that opens a path. The new vault owns the bytes and owns the version history. Only the handful of files that <em>declare</em> where the canonical location is needed editing &mdash; and those needed editing anyway.</p>
+            <p>Because the source and destination were on the same volume, the move was a rename. Six hundred files and 237&nbsp;MB relocated instantly and consumed no additional disk, which mattered: the machine had 8.5&nbsp;GB free.</p>
+
+            <h2 class="mb-3 mt-5">The second read</h2>
+            <p>Transparency cuts both ways, and this is where the technique earns its warnings.</p>
+            <p><strong>Git cannot see a junction.</strong> On Windows it does not treat one as a link the way it treats a POSIX symlink. It walks straight through and indexes the target as ordinary files of the outer repo. After the move, <code>git status</code> in the old repository listed every migrated file as though nothing had happened. Two repositories now claimed the same bytes. The fix is to gitignore the mount points and untrack what moved &mdash; but nothing warns you. There is no message. You have to already know.</p>
+            <p><strong>Syncthing has the opposite problem.</strong> It <em>will</em> follow the reparse point, and will happily sync the same tree once per mount point. The workspace already carried an anti-loop rule for exactly this reason, written by someone who had presumably learned it the hard way.</p>
+            <p><strong>And a recursive delete follows the link.</strong> <code>Remove-Item -Recurse</code> on a junction does not remove the link. It removes the target's contents. The command that means &ldquo;clean up this shortcut&rdquo; means &ldquo;destroy the thing it points at&rdquo;. Use <code>rmdir</code>, which removes only the link.</p>
+            <p>So the technique is cheap, and its failure modes are all silent and all severe. That combination is worth respecting rather than avoiding: write the warning into whatever file your tools and your teammates actually read, and the sharp edge stays sheathed.</p>
+
+            <h2 class="mb-3 mt-5">Where this generalises</h2>
+            <p>Any migration where the movers are few and the referrers are many. Symlinks on Unix, junctions on Windows, <code>CNAME</code> records, HTTP 301s, database views over renamed tables, re-export shims in a package that moved. The pattern is the same: keep the old address answering, and the cost of moving collapses to the cost of moving.</p>
+            <p>The instinct is to update every pointer because leaving one behind feels like debt. Sometimes the pointer <em>is</em> the migration.</p>
+            </article>
+            <div class="tag-widget post-tag-container mb-5 mt-5">
+              <div class="tagcloud">
+                <a href="index.html#blog-section" class="tag-cloud-link">Migration</a>
+                <a href="index.html#blog-section" class="tag-cloud-link">Knowledge base</a>
+                <a href="index.html#blog-section" class="tag-cloud-link">Filesystems</a>
+                <a href="index.html#blog-section" class="tag-cloud-link">Technique</a>
+              </div>
+            </div>
+
+            <div class="about-author d-flex p-4 bg-dark">
+              <div class="bio mr-5">
+                <img src="images/charles-portrait.jpg" alt="Portrait of Charles Oriokot" class="img-fluid mb-4">
+              </div>
+              <div class="desc">
+                <h3>Charles Oriokot</h3>
+                <p>Charles is an IT Officer at Nova Microfinance in Kampala. His work spans core banking migrations, data reconciliation, payment system integration, operational reporting, and practical automation. He writes about financial-system reliability, evidence-led operations, and building systems that hold up in day-to-day use.</p>
+              </div>
+            </div>
+
+            <div class="comment-form-wrap pt-5">
+              <h3 class="mb-5">Leave a reply</h3>
+              <p class="mb-4">This site has no comment database, so a reply opens in your own email app and comes straight to me.</p>
+              <form class="p-5 bg-dark" id="reply-form">
+                <div class="form-group">
+                  <label for="name">Name *</label>
+                  <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="website">Website</label>
+                  <input type="url" class="form-control" id="website" name="website">
+                </div>
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" cols="30" rows="10" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="submit" value="Send reply" class="btn py-3 px-4 btn-primary">
+                </div>
+              </form>
+            </div>
+
+          </div> <!-- .col-md-8 -->
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box ftco-animate">
+            	<h3 class="heading-sidebar">Topics</h3>
+              <ul class="categories">
+                <li><a href="index.html#services-section">Financial systems</a></li>
+                <li><a href="index.html#services-section">Data &amp; reporting</a></li>
+                <li><a href="index.html#services-section">Automation</a></li>
+                <li><a href="index.html#services-section">IT governance</a></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading-sidebar">More writing</h3>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" href="installed-is-not-running.html" style="background-image: url(images/image_1.jpg);" aria-hidden="true" tabindex="-1"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="installed-is-not-running.html">Installed Is Not Configured Is Not Running Is Not Used</a></h3>
+                  <div class="meta">
+                    <div><span class="icon-calendar"></span> August 28, 2026</div>
+                    <div><span class="icon-person"></span> Charles Oriokot</div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" href="invert-the-junction.html" style="background-image: url(images/image_2.jpg);" aria-hidden="true" tabindex="-1"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="invert-the-junction.html" aria-current="page">Invert the Junction</a></h3>
+                  <div class="meta">
+                    <div><span class="icon-calendar"></span> August 4, 2026</div>
+                    <div><span class="icon-person"></span> Charles Oriokot</div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" href="the-dead-ends-are-the-point.html" style="background-image: url(images/image_3.jpg);" aria-hidden="true" tabindex="-1"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="the-dead-ends-are-the-point.html">The Dead Ends Are the Point</a></h3>
+                  <div class="meta">
+                    <div><span class="icon-calendar"></span> August 2, 2026</div>
+                    <div><span class="icon-person"></span> Charles Oriokot</div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" href="the-rooms-where-systems-get-built.html" style="background-image: url(images/ict-hub-reception.jpg);" aria-hidden="true" tabindex="-1"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="the-rooms-where-systems-get-built.html">The Rooms Where Systems Get Built</a></h3>
+                  <div class="meta">
+                    <div><span class="icon-calendar"></span> September 4, 2026</div>
+                    <div><span class="icon-person"></span> Charles Oriokot</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading-sidebar">Tag Cloud</h3>
+              <div class="tagcloud">
+                <a href="index.html#skills-section" class="tag-cloud-link">Fineract</a>
+                <a href="index.html#skills-section" class="tag-cloud-link">Python</a>
+                <a href="index.html#skills-section" class="tag-cloud-link">SQL</a>
+                <a href="index.html#services-section" class="tag-cloud-link">Automation</a>
+                <a href="index.html#services-section" class="tag-cloud-link">Metabase</a>
+                <a href="index.html#services-section" class="tag-cloud-link">Reporting</a>
+                <a href="index.html#services-section" class="tag-cloud-link">APIs</a>
+                <a href="index.html#portfolio-section" class="tag-cloud-link">Migration</a>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading-sidebar">About the author</h3>
+              <p>Technology that holds up in real operations. I build and repair the systems that day-to-day operations depend on&mdash;core banking, data reconciliation, reporting, and practical automation.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section> <!-- .section -->
+    </main>
+
+    <footer class="ftco-footer ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">About</h2>
+              <p>IT systems, data, reporting and automation—grounded in the realities of day-to-day operations.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                  <li class="ftco-animate"><a href="https://github.com/Chrl3y" target="_blank" rel="noopener noreferrer" aria-label="Charles Oriokot on GitHub"><span class="icon-github"></span></a></li>
+                  <li class="ftco-animate"><a href="https://www.linkedin.com/in/charles-oriokot-b3a610312" target="_blank" rel="noopener noreferrer" aria-label="Charles Oriokot on LinkedIn"><span class="icon-linkedin"></span></a></li>
+                  <li class="ftco-animate"><a href="https://x.com/charley_ediu" target="_blank" rel="noopener noreferrer" aria-label="Charles Oriokot on X (formerly Twitter)"><span class="icon-twitter"></span></a></li>
+                  <li class="ftco-animate"><a href="https://www.instagram.com/chuck_eternal" target="_blank" rel="noopener noreferrer" aria-label="Charles Oriokot on Instagram"><span class="icon-instagram"></span></a></li>
+                  <li class="ftco-animate"><a href="mailto:charleyfix47@gmail.com" aria-label="Email Charles Oriokot"><span class="icon-envelope"></span></a></li>
+                  <li class="ftco-animate"><a href="tel:+256763563233" aria-label="Call Charles Oriokot"><span class="icon-phone2"></span></a></li>
+                </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">Links</h2>
+              <ul class="list-unstyled">
+                <li><a href="index.html#home-section"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+                <li><a href="index.html#about-section"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
+                <li><a href="index.html#portfolio-section"><span class="icon-long-arrow-right mr-2"></span>Portfolio</a></li>
+                <li><a href="index.html#services-section"><span class="icon-long-arrow-right mr-2"></span>Capabilities</a></li>
+                <li><a href="index.html#contact-section"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                <li><a href="index.html#credentials-section"><span class="icon-long-arrow-right mr-2"></span>Credentials</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Capabilities</h2>
+              <ul class="list-unstyled">
+                <li><a href="index.html#services-section"><span class="icon-long-arrow-right mr-2"></span>Financial systems</a></li>
+                <li><a href="index.html#services-section"><span class="icon-long-arrow-right mr-2"></span>Data &amp; reporting</a></li>
+                <li><a href="index.html#services-section"><span class="icon-long-arrow-right mr-2"></span>Automation</a></li>
+                <li><a href="index.html#services-section"><span class="icon-long-arrow-right mr-2"></span>Technical support</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Get in touch</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text">Kampala, Uganda</span></li>
+                  <li><a href="tel:+256763563233"><span class="icon icon-phone"></span><span class="text">+256 763 563 233</span></a></li>
+                  <li><a href="mailto:charleyfix47@gmail.com"><span class="icon icon-envelope"></span><span class="text">charleyfix47@gmail.com</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; <span id="current-year">2026</span> Oriokot Charles Ediu. Built from the Clark template by Colorlib, distributed by ThemeWagon.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="ftco-loader" class="show fullscreen" role="status" aria-label="Loading article">
+      <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ffbd39"/>
+      </svg>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/portfolio.js"></script>
+  </body>
+</html>
