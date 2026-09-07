@@ -195,3 +195,66 @@ a:focus-visible,button:focus-visible { outline:3px solid #fff; outline-offset:4p
 .hero-wrap .overlay { opacity: 1;
   background: linear-gradient(180deg, rgba(5,5,5,.45) 0%, rgba(5,5,5,.30) 35%, rgba(5,5,5,.90) 100%); }
 .hero-wrap .bread { text-shadow: 0 2px 24px rgba(0,0,0,.55); }
+
+/* Initiatives, ecosystem and evidence states ------------------------------ */
+.initiative-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.initiative-card,.ecosystem-card,.atlas-card { padding:1.75rem; border:1px solid var(--portfolio-line); border-radius:.4rem; background:var(--portfolio-panel); }
+.initiative-card h3,.ecosystem-card h3,.atlas-card h3 { margin:.75rem 0; color:#fff; font-size:1.3rem; }
+.initiative-card p,.ecosystem-card p,.atlas-card p { color:rgba(255,255,255,.66); }
+.initiative-status,.evidence-label { display:inline-flex; padding:.35rem .6rem; border:1px solid rgba(255,189,57,.35); border-radius:999px; color:var(--portfolio-gold); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.ecosystem-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.ecosystem-card { min-height:245px; }
+.evidence-label--live { border-color:rgba(47,194,122,.4); color:#59d79b; }
+.evidence-label--explore { border-color:rgba(56,139,253,.45); color:#6ea8ff; }
+.evidence-label--trial { border-color:rgba(255,189,57,.45); color:var(--portfolio-gold); }
+.evidence-label--concept { border-color:rgba(164,113,255,.5); color:#c19cff; }
+
+/* Credential evidence cards ---------------------------------------------- */
+.credential-feature { display:grid; grid-template-rows:170px auto; gap:1.25rem; }
+.credential-feature img { width:100%; height:170px; object-fit:contain; border-radius:.25rem; background:#eef3e5; }
+.credential-feature h3 { margin:.35rem 0 .7rem; }
+.credential-issuer { color:var(--portfolio-gold); font-size:.7rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.credential-badge { display:grid; place-items:center; height:170px; border:1px solid rgba(56,139,253,.35); border-radius:.25rem; background:radial-gradient(circle at 50% 35%,rgba(56,139,253,.2),transparent 65%),#080e18; color:#7db5ff; font-size:2.6rem; font-weight:800; letter-spacing:.14em; }
+
+/* Pictorial --------------------------------------------------------------- */
+.pictorial-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-rows:300px; gap:1rem; }
+.pictorial-card { position:relative; margin:0; overflow:hidden; border:1px solid var(--portfolio-line); border-radius:.4rem; background:#111; }
+.pictorial-card--tall { grid-row:span 2; }
+.pictorial-card img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .45s ease; }
+.pictorial-card:hover img { transform:scale(1.02); }
+.pictorial-card figcaption { position:absolute; inset:auto 0 0; display:grid; gap:.15rem; padding:3.5rem 1rem 1rem; background:linear-gradient(transparent,rgba(0,0,0,.92)); }
+.pictorial-card figcaption strong { color:#fff; }
+.pictorial-card figcaption span { color:rgba(255,255,255,.62); font-size:.78rem; }
+
+/* Venture and project-atlas pages ---------------------------------------- */
+.venture-hero { min-height:680px; display:flex; align-items:end; padding:10rem 0 6rem; background:radial-gradient(circle at 70% 30%,rgba(0,194,199,.18),transparent 34%),radial-gradient(circle at 20% 80%,rgba(255,189,57,.15),transparent 36%),#050505; }
+.venture-hero h1 { max-width:12ch; color:#fff; font-size:clamp(3rem,7vw,6rem); line-height:.95; letter-spacing:-.055em; }
+.venture-hero p { max-width:52rem; font-size:1.12rem; line-height:1.75; }
+.atlas-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.atlas-card { min-height:315px; }
+.atlas-card ul { padding-left:1.1rem; color:rgba(255,255,255,.62); }
+.atlas-card li { margin-bottom:.45rem; }
+.evidence-table { width:100%; border-collapse:collapse; color:rgba(255,255,255,.72); }
+.evidence-table th,.evidence-table td { padding:1rem; border-bottom:1px solid var(--portfolio-line); vertical-align:top; text-align:left; }
+.evidence-table th { color:#fff; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; }
+.brand-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.brand-pair figure { margin:0; }
+.brand-pair img { width:100%; border:1px solid var(--portfolio-line); border-radius:.35rem; }
+.brand-pair figcaption { margin-top:.65rem; color:rgba(255,255,255,.55); font-size:.8rem; }
+
+@media (max-width:991.98px) { .initiative-grid,.atlas-grid { grid-template-columns:1fr; } }
+@media (max-width:767.98px) {
+  .ecosystem-grid,.brand-pair { grid-template-columns:1fr; }
+  .pictorial-grid { grid-template-columns:1fr; grid-auto-rows:460px; }
+  .pictorial-card--tall { grid-row:span 1; }
+  .venture-hero { min-height:600px; }
+  .evidence-table { display:block; overflow-x:auto; }
+}
+
+@media (max-width:575.98px) {
+  .owl-carousel.home-slider .slider-item .slider-text h1 { font-size:2.65rem; line-height:1.08; overflow-wrap:anywhere; }
+  .owl-carousel.home-slider .slider-item .slider-text h2 { font-size:1.6rem; line-height:1.35; }
+  .owl-carousel.home-slider .slider-item .slider-text p { display:grid; grid-template-columns:1fr; gap:.7rem; padding:0 1rem; }
+  .owl-carousel.home-slider .slider-item .slider-text p .btn { width:100%; margin:0; white-space:normal; }
+  .hero-proof { margin-top:1.5rem; }
+}
