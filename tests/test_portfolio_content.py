@@ -207,6 +207,27 @@ class PortfolioContentTests(unittest.TestCase):
         self.assertIn(".owl-carousel.home-slider .slider-item .slider-text p", css)
         self.assertIn("grid-template-columns:1fr", css)
 
+    def test_intro_images_blend_into_black_and_use_new_portrait(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        css = (ROOT / "css" / "custom.css").read_text(encoding="utf-8")
+        portrait = ROOT / "images" / "charles-hero-city.jpg"
+
+        self.assertIn("images/charles-hero-city.jpg", html)
+        self.assertIn("hero-image--primary", html)
+        self.assertIn(".hero-image > .overlay", css)
+        self.assertIn("linear-gradient(90deg", css)
+        self.assertIn("linear-gradient(180deg", css)
+        self.assertTrue(portrait.exists())
+
+        result = subprocess.run(
+            ["sips", "-g", "pixelWidth", "-g", "pixelHeight", str(portrait)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn("pixelWidth: 1280", result.stdout)
+        self.assertIn("pixelHeight: 1600", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()
