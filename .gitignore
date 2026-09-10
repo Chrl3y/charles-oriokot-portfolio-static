@@ -24,3 +24,9 @@ node_modules/
 # Build outputs (if added later)
 dist/
 build/
+
+# Cloudflare Wrangler local cache (contains account id)
+.wrangler/
+
+# Local editor workspace (machine-specific absolute paths)
+*.code-workspace
