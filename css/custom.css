@@ -460,3 +460,89 @@ a:focus-visible,button:focus-visible { outline:3px solid #fff; outline-offset:4p
   .owl-carousel.home-slider .slider-item .slider-text p .btn { width:100%; margin:0; white-space:normal; }
   .hero-proof { margin-top:1.5rem; }
 }
+
+/* Product catalogue ----------------------------------------------------------
+   products.html. The sheets are dense marketing artwork at three different
+   aspect ratios (1:1, 3:2 and 2.5:1), so the hero is a fixed 16/9 window with
+   object-fit:cover rather than intrinsic sizing — otherwise the grid rows go
+   ragged. Every sheet carries its logo and headline top-left, hence
+   object-position:left top: the crop keeps the brand in frame whatever the
+   source ratio. Card is an <article>, not a wrapping <a> like
+   .social-story-card, because each one holds two separate links. */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.35rem;
+  overflow: hidden;
+  border: 1px solid var(--portfolio-line, rgba(255,255,255,.12));
+  border-radius: .35rem;
+  background: rgba(255,255,255,.025);
+  color: var(--portfolio-copy, rgba(255,255,255,.76));
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,189,57,.5);
+  background: rgba(255,189,57,.055);
+}
+.product-media {
+  aspect-ratio: 16 / 9;
+  margin: -1.35rem -1.35rem 1.15rem;
+  overflow: hidden;
+  background: #111;
+}
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  transition: transform .35s ease;
+}
+.product-card:hover .product-media img { transform: scale(1.025); }
+.product-card h3 {
+  margin-bottom: .2rem;
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.product-tagline {
+  display: block;
+  margin-bottom: .85rem;
+  color: var(--portfolio-gold, #ffbd39);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+/* The one maturity qualifier on this page sits between tagline and copy, so it
+   needs the breathing room the inline-flex pill does not carry itself. */
+.product-card .evidence-label { margin-bottom: .9rem; }
+.product-features {
+  margin: 0 0 1.15rem;
+  padding: 0;
+  list-style: none;
+}
+.product-features li {
+  position: relative;
+  padding-left: 1.05rem;
+  font-size: .87rem;
+  line-height: 1.55;
+}
+.product-features li::before {
+  position: absolute;
+  left: 0;
+  color: var(--portfolio-gold, #ffbd39);
+  content: "\203A";
+}
+/* Pins the sheet link to the card foot so CTAs line up across uneven cards. */
+.product-card .text-link { margin-top: auto; }
+.catalogue-cta-note { margin-bottom: 1.5rem; }
+#catalogue-section .btn-primary { margin: .4rem .35rem; }
+
+@media (max-width:991.98px) { .product-grid { grid-template-columns:1fr; } }

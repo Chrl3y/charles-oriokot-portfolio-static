@@ -187,7 +187,7 @@ class PortfolioContentTests(unittest.TestCase):
         self.assertNotIn("Cisco Certified Network Associate (CCNA) - Ongoing", text)
 
     def test_local_page_links_and_media_resolve(self):
-        pages = [ROOT / "index.html", ROOT / "vici-reality.html", ROOT / "ecosystem.html"]
+        pages = [ROOT / "index.html", ROOT / "vici-reality.html", ROOT / "ecosystem.html", ROOT / "products.html"]
         missing = []
         for page in pages:
             parser = parse_html(page)
